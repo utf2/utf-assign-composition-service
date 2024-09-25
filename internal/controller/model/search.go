@@ -14,16 +14,12 @@ const (
 	Deadlined    StudentFormStatus = "Просрочена"
 )
 
-type TeacherDTO struct {
-	ID         uuid.UUID
-	FirstName  string
-	LastName   string
-	MiddleName string
+type SearchStudentAssignedFormsRequest struct {
+	StudentID uuid.UUID
 }
 
-type StudentFormResultDTO struct {
-	ScoredPoints      uint
-	MaxPossiblePoints uint
+type SearchStudentAssignedFormsResponse struct {
+	AssignedForms []AssignedFormDTO
 }
 
 type AssignedFormDTO struct {
@@ -37,16 +33,16 @@ type AssignedFormDTO struct {
 	Result      StudentFormResultDTO
 }
 
-type SearchStudentAssignedFormsRequest struct {
-	StudentID uuid.UUID
+type TeacherDTO struct {
+	ID         uuid.UUID
+	FirstName  string
+	LastName   string
+	MiddleName string
 }
 
-type SearchStudentAssignedFormsResponse struct {
-	AssignedForms []AssignedFormDTO
-}
-
-// TODO
-type CreatedFormDTO struct {
+type StudentFormResultDTO struct {
+	ScoredPoints      uint
+	MaxPossiblePoints uint
 }
 
 type SearchTeacherCreatedFormsRequest struct {
@@ -55,4 +51,20 @@ type SearchTeacherCreatedFormsRequest struct {
 
 type SearchTeacherCreatedFormsResponse struct {
 	CreatedForms []CreatedFormDTO
+}
+
+type CreatedFormDTO struct {
+	ID             uuid.UUID
+	Name           string
+	Description    string
+	CreateDate     time.Time
+	StartDate      time.Time
+	EndDate        time.Time
+	AssignedGroups []GroupDTO
+}
+
+type GroupDTO struct {
+	ID                 uuid.UUID
+	SpecializationCode string
+	GroupNumber        string
 }
